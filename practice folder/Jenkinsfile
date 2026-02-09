@@ -1,0 +1,15 @@
+pipeline{
+    agent any
+    stages{
+        stage ('code checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/vintijain/project.git'
+            }
+        }
+        stage ('list file'){
+            stpes{
+                sh 'ls -la'
+            }
+        }
+    }
+}

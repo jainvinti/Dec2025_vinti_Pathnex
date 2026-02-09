@@ -1,0 +1,9 @@
+stages:
+  - checkout
+
+code_checkout:
+  stage: checkout
+  script:
+    - git clone https://github.com/vintijain/project.git
+    - cd project
+    - ls -la
