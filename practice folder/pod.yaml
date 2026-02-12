@@ -8,3 +8,6 @@ spec:
       image: ngnix:latest
       ports:
         - containerPort: 80 
+      env:
+        - name: APP_ENV
+          value: "production"

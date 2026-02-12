@@ -14,7 +14,7 @@ pipeline{
     }
 }
 
-------------------------------------
+//--------------------------------------------------------------------------------
 //mvn lifecycle  -  validate → compile → test → package → install
 //mvn install do everything in one command
 
@@ -27,7 +27,7 @@ pipeline{
     stages{
         stage('Checkout'){
             steps{
-                git url: https://github.com/vintijain/project-java.git
+                git url: 'https://github.com/vintijain/project-java.git'
             }
         }
 
@@ -46,6 +46,42 @@ pipeline{
         stage('Package'){
             steps{
                 sh 'mvn package'
+            }
+        }
+    }
+}
+
+
+//-------------------------------------------------------------
+
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS-16'
+    }
+    stages{
+        stage ('checkout')
+        {
+            steps{
+                git url: 'https://github.com/jainvinti/project-nodejs.git'
+            }
+        }
+
+        stage ('install dependecies'){
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('run tests'){
+            steps{
+                sh 'npm test'
+            }
+        }
+
+        stage('Build'){
+            steps{
+                sh 'npm run build'
             }
         }
     }

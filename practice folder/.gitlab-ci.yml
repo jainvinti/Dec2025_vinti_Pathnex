@@ -8,7 +8,7 @@ code_checkout:
     - cd project
     - ls -la
 
----------------------------------
+#------------------------------------------------------------------
 
 stages:
   - build
@@ -34,5 +34,34 @@ maven_package:
   stage: package
   image: maven:3.8.1-jdk-17
   script:
-    - cdproject_java
+    - cd project_java
     - mvn package
+
+
+#----------------------------------------------------------------------
+stages:
+  - Install
+  - Test
+  - Build
+
+install_dependecies:
+  stage: Insatll
+  image: node:16
+  script:
+    - git clone https://github.com/vintijain/nodejs.git
+    - cd nodejs
+    - npm insall
+
+node-test:
+  stage: Test
+  image: nodejs:16
+  script:
+    - cd nodejs
+    - npm test
+
+node-build:
+  stage: Build
+  image: node:16
+  script:
+    - cd nodejs
+    - npm run build
