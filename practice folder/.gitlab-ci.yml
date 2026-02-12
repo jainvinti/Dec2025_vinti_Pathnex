@@ -7,3 +7,32 @@ code_checkout:
     - git clone https://github.com/vintijain/project.git
     - cd project
     - ls -la
+
+---------------------------------
+
+stages:
+  - build
+  - test
+  - package
+
+maven_build:
+  stage: build
+  image: maven:3.8.1-jdk-17
+  script:
+    - git clone https://github.com/vintijain/project_java.git
+    - cd project_java
+    - mvn clean compile
+
+maven_test:
+  stage: test
+  image: maven:3.8.1-jdk-17
+  script:
+    - cd project_java
+    - mvn test
+
+maven_package:
+  stage: package
+  image: maven:3.8.1-jdk-17
+  script:
+    - cdproject_java
+    - mvn package

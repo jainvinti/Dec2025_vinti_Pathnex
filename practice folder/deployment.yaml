@@ -1,0 +1,31 @@
+# Kubernetes-specific YAML rules 🧠
+# •	metadata, spec, labels → maps
+#	•	containers, env, ports, volumes → lists
+#	•	Even one container must be inside a list
+#	•	Map (object) → no dash
+#	•	List (array) → dash required
+
+#	•	v1 → Pod, Service, ConfigMap, Secret, Namespace, Node, PV, PVC 
+#	•	apps/v1 → Deployment, StatefulSet, DaemonSet, ReplicaSet
+#	•	batch/v1 → Job, CronJob
+#	•	networking.k8s.io/v1 → Ingress, NetworkPolicy
+
+apiVersion: apps/v1
+kind: deployment
+metedate:
+  name: app_deployment
+spec:
+  replica: 2
+  selector:
+    matchLabels:
+      app: FIS_app
+  templete:
+    metadata:
+      labels: 
+        app: FIS_app
+    spec:
+      containers:
+        - name: app
+          image: ngnix
+          ports:
+            - containerPort: 80

@@ -1,0 +1,9 @@
+- name: create user on server
+  hosts: any
+  become: yes
+  
+  tasks:
+    - name: create user
+      user:                       #user — create/update/remove local user accounts.
+        name: vinti
+        shell: /bin/bash          #Login shell for the user (so they get bash when they SSH or log in).

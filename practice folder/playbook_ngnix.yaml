@@ -1,0 +1,15 @@
+- name: Install ngnix on all servers
+  hosts: all
+  become: yes                             #Run the tasks with elevated privileges (e.g. sudo/root), needed to install packages.
+
+  tasks:
+    - name: install ngnox
+      yum:                                #Ansible module for RHEL/CentOS/Amazon Linux package management.
+        name: ngnix
+        state: present
+
+    - name: enable ngnix
+      service:                            #manages the systemd (or init) service.
+        name: ngnix
+        state: started
+        enabled: yes
