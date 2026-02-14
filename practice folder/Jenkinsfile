@@ -62,6 +62,9 @@ pipeline {
     environment {
         VERSION = "1.2"
     }
+    parameters {
+        string(name: 'ENVIRONMENT', defaultValue: 'dev', description: 'Deployment Environment')
+    }
     stages{
         stage ('checkout')
         {
@@ -73,7 +76,8 @@ pipeline {
         stage ('install dependecies'){
             steps {
                 sh 'npm install'
-                sh 'echo $VERSION' 
+                sh 'echo "$VERSION"' 
+                sh 'echo "Deploying to $ENVIRONMENT"'
             }
         }
 

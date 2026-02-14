@@ -73,6 +73,7 @@ stages:
 
 variables:
   VERSION: "1.2"
+  ENVIRONMENT: "dev"
 
 build_execution:
   stage: build-test
@@ -82,6 +83,7 @@ build_execution:
     - cd project
     - mvn clean compile
     - echo $VERSION
+    - echo "Deploying to $ENVIRONMENT"
   parallel: 1
 
 test_execution:
