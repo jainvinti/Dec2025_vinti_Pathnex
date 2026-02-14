@@ -13,3 +13,18 @@
         name: ngnix
         state: started
         enabled: yes
+
+#----------------------------------------------------------
+
+    - name: install multiple packages
+      hosts: all
+      become: yes
+      tasks:
+        - name: install wget and git
+          yum:
+            name:
+              - wget
+              - git
+            state: present 
+
+#----------------------------------------------------------

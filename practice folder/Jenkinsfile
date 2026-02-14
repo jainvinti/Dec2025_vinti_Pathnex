@@ -86,3 +86,23 @@ pipeline {
         }
     }
 }
+
+//-------------------------------------------------------------
+//parallel stages
+pipeline{
+    agent any
+    stages{
+        parallel{
+            stage('build'){
+                steps{
+                    sh 'mvn clean compile'
+                }
+            }
+            stage('test'){
+                steps{
+                    sh 'mvn test'
+                }
+            }
+        }
+    }
+}
