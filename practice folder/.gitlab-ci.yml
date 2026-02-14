@@ -71,6 +71,9 @@ node-build:
 stages:
   - build-test
 
+variables:
+  VERSION: "1.2"
+
 build_execution:
   stage: build-test
   image: maven:3.8.1-jdk-17
@@ -78,6 +81,7 @@ build_execution:
     - git clone https://github.com/vintijain/project.git
     - cd project
     - mvn clean compile
+    - echo $VERSION
   parallel: 1
 
 test_execution:

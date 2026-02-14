@@ -16,15 +16,32 @@
 
 #----------------------------------------------------------
 
-    - name: install multiple packages
-      hosts: all
-      become: yes
-      tasks:
-        - name: install wget and git
-          yum:
-            name:
-              - wget
-              - git
-            state: present 
+- name: install multiple packages
+  hosts: all
+  become: yes
+    tasks:
+      - name: install wget and git
+        yum:
+          name:
+            - wget
+            - git
+          state: present 
 
 #----------------------------------------------------------
+
+- name: handlers to restart ngnix
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: update config file
+      copy:
+        src: index.html
+        dest: /usr/share/ngnix/html/index.html
+      notify: Restart ngnix          #If this task changes the file, queue the handler named "Restart Nginx" to run at the end of the play.
+  
+  handlers:                          #List of handler tasks. Handlers run only when notified and only once per play, at the end.
+    - name: Restart ngnix
+      service:
+        name: ngnix
+        state: restarted

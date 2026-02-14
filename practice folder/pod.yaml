@@ -11,3 +11,24 @@ spec:
       env:
         - name: APP_ENV
           value: "production"
+
+#------------------------------------------------
+#A Pod with one container (nginx) and resource limits: the container cannot use more than the given CPU and memory.
+
+apiVersion: v1
+kind: pod
+metadata:
+  name: limited_resource
+spec:
+  containers:
+    - name: app
+      image: nginx
+      ports:
+        containerPort: 80
+      resources:
+        requests:      # minimum guaranteed
+          memory: "128Mi"
+          cpu: "250m"
+        limits:        # maximum allowed
+          memory: "256Mi"
+          CPU: "500m"

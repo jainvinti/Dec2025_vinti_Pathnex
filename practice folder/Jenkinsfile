@@ -59,6 +59,9 @@ pipeline {
     tools {
         nodejs 'NodeJS-16'
     }
+    environment {
+        VERSION = "1.2"
+    }
     stages{
         stage ('checkout')
         {
@@ -70,6 +73,7 @@ pipeline {
         stage ('install dependecies'){
             steps {
                 sh 'npm install'
+                sh 'echo $VERSION' 
             }
         }
 

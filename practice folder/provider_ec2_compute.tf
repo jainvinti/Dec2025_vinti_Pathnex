@@ -26,6 +26,13 @@ resource "aws_key_pair" "vinti_key" {
 resource "aws_instance" "vinti_ec2" {
   ami = "ami-0asdhfluuD"
   instance_type = "c5.xlarge"
+  
+  user_data = <<EOF
+  #!/bin/bash
+  yum install -y httpd
+  systemctl start httpd
+  EOF
+
   key_name = aws_key_pair.vinti_key.key_name
 
   tags = {
