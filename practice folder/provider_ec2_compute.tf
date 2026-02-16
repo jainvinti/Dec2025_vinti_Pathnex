@@ -71,3 +71,21 @@ resource "aws_internet_gateway" "vintiIGW" {
         Name = "vinti_IGW"
     }
 }
+
+resource "aws_route_table" "vintiRoute" {
+  vpc_id = aws_vpc.vintiVPC.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.vintiIGW.id
+  }
+
+  tags = {
+    Name = vinti-Routetable
+  }
+}
+
+resource "aws_route_table_association" "vintiRTA" {
+    subnet_id = aws_subnet.vintiSubnet.id
+    route_table_id = aws_route_table.vintiRoute.id
+}

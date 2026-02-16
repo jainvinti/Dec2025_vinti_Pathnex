@@ -33,7 +33,13 @@ pipeline{
 
         stage('Compile'){
             steps{
-                sh 'mvn clean compile'
+                sh '''
+                if [ -d ".m2" ]; then
+                    echo "using existing dependicies"
+                else
+                    mvn clean compile
+                fi
+                '''
             }
         }
 

@@ -63,6 +63,7 @@
       yum:
         name: "{{ install_vars }}"
         state: present
+      when: ansible_facts['os_family'] == "Redhat"
 
 #----------------------------------------------------------
 

@@ -78,6 +78,10 @@ variables:
 build_execution:
   stage: build-test
   image: maven:3.8.1-jdk-17
+  cache:
+    key: maven-cache
+    paths:
+      - .m2/repository
   script:
     - git clone https://github.com/vintijain/project.git
     - cd project

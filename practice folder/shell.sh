@@ -18,3 +18,7 @@ done
 
 LOAD=$(uptime | awk '{print $10}')
 echo "Current CPU load is $LOAD"
+
+for i in {1..10}; do
+    echo "number $i"
+done
