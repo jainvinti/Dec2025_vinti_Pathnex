@@ -11,3 +11,10 @@ else
 fi
 
 df -h  #disk usage
+
+for item in vinti devops training; do
+    echo "Item : $item"
+done
+
+LOAD=$(uptime | awk '{print $10}')
+echo "Current CPU load is $LOAD"

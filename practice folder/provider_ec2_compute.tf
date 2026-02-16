@@ -63,3 +63,11 @@ resource "aws_subnet" "vintiSubnet" {
         Name = "vinti-subnet"
     }
 }
+
+resource "aws_internet_gateway" "vintiIGW" {
+    vpc_id = aws_vpc.vintiVPC.id
+
+    tags = {
+        Name = "vinti_IGW"
+    }
+}

@@ -63,3 +63,14 @@
       yum:
         name: "{{ install_vars }}"
         state: present
+
+#----------------------------------------------------------
+
+- name: deploy templete jinja2
+  hosts: all
+  become: yes
+  tasks:
+    - name: copy templete file
+      templete:
+        src: vinti.conf.j2  #template processes a Jinja2 file and replaces variables dynamically before copying
+        dest: /etc/vinti.conf

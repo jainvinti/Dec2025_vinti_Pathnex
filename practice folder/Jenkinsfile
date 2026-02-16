@@ -93,13 +93,20 @@ pipeline {
             }
         }
 
-        stage('Deploy')
+        stage('Deploy'){
             when {
                 expression { params.ENVIRONMENT == 'dev' }
             }
             steps {
                 sh 'echo deploying version $VERSION on $ENVIRONMENT'
             }
+        }
+
+        stage('Artifacts'){
+            steps{
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
     }
 }
 

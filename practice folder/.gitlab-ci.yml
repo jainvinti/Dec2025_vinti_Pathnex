@@ -87,6 +87,11 @@ build_execution:
   parallel: 1
   only: 
     - main   #run only on a branch
+  artifacts:
+    paths: 
+      - target/*.jar
+    expire_in: 1 week
+
 
 test_execution:
   stage: build-test
