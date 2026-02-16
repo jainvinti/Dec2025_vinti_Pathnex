@@ -45,3 +45,21 @@
       service:
         name: ngnix
         state: restarted
+
+#----------------------------------------------------------
+
+- name: install packages using variables
+  hosts: all
+  become: yes
+
+  vars:
+    install_var:
+      - wget
+      - git
+      - ngnix
+  
+  tasks:
+    - name: install packages
+      yum:
+        name: "{{ install_vars }}"
+        state: present

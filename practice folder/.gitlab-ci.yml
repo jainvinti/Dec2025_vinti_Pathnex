@@ -85,6 +85,8 @@ build_execution:
     - echo $VERSION
     - echo "Deploying to $ENVIRONMENT"
   parallel: 1
+  only: 
+    - main   #run only on a branch
 
 test_execution:
   stage: build-test
@@ -93,5 +95,8 @@ test_execution:
    - cd project
    - mvn test
   parallel: 1      #run one instance of this job.” It does not mean “run this job in parallel with other jobs.”
+  only:
+    variables:
+      $CI_ENVIRONMENT_NAME = 'dev'   #Uses GitLab’s built‑in variable 
 
 #----------------------------------------------------------------------

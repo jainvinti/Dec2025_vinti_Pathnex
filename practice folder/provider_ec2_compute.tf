@@ -39,3 +39,27 @@ resource "aws_instance" "vinti_ec2" {
     Name = "vinti-EC2"
   }
 }
+
+#-------------------------------------------------------------
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_vpc" "vintiVPC" {
+    cidr_block = "10.0.0.1/16"
+
+    tags = {
+        Name = "vinti-VPC"
+    }
+}
+
+resource "aws_subnet" "vintiSubnet" {
+    vpc_id = aws_vpc.vintiVPC.id
+    cidr_block = "10.0.0.0/24"
+    map_public_ip_on_launch = true
+
+    tags ={
+        Name = "vinti-subnet"
+    }
+}

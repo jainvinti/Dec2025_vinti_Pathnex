@@ -92,6 +92,14 @@ pipeline {
                 sh 'npm run build'
             }
         }
+
+        stage('Deploy')
+            when {
+                expression { params.ENVIRONMENT == 'dev' }
+            }
+            steps {
+                sh 'echo deploying version $VERSION on $ENVIRONMENT'
+            }
     }
 }
 
