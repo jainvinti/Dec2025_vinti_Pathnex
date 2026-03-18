@@ -7,3 +7,21 @@
       user:                       #user — create/update/remove local user accounts.
         name: vinti
         shell: /bin/bash          #Login shell for the user (so they get bash when they SSH or log in).
+
+
+#---------------------------------------------------
+
+- name: install mariaDB
+  hosts: all
+  become: yes
+  tasks:
+    - name: install maria db
+      yum:
+        name: mariadb-server
+        state: present
+      
+    - name: enable maria db
+      service:
+        name: mariadb
+        state: started
+        enabled: yes

@@ -40,6 +40,10 @@ resource "aws_instance" "vinti_ec2" {
   }
 }
 
+output "Vinti-publicIP" {
+    value = aws_instance.vinti_ec2.public_ip
+}
+
 #-------------------------------------------------------------
 
 provider "aws" {
